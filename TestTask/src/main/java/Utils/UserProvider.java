@@ -17,7 +17,7 @@ public class UserProvider {
         }
     }
 
-    public static String get(String key) {
+    public String get(String key) {
         return userProp.getProperty(key);
     }
 
