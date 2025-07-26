@@ -13,6 +13,7 @@ public class BaseTestSetups {
 
     public UserProvider user;
     protected static String authToken;
+    protected static String lastCreatedEmail;
 
     @BeforeClass()
     public void testPreparation(){

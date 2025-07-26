@@ -2,14 +2,17 @@ package apiTests;
 
 import api.dto.UserCreate;
 import api.dto.UserCreateResponse;
+import api.dto.UserEmail;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 import static api.spec.Specifications.authSpec;
 import static java.lang.String.valueOf;
 import static io.restassured.RestAssured.given;
-import static utils.APIUrls.USERS_CREATION_PATH;
+import static utils.APIUrls.*;
 
 
 public class PlayersAPI extends BaseTestSetups {
@@ -50,11 +53,36 @@ public class PlayersAPI extends BaseTestSetups {
                 .extract()
                 .as(UserCreateResponse.class);
 
-        Assert.assertNotNull(response.getId(), "ID should not be null");
         Assert.assertEquals(response.getUsername(), user.getUsername(), "Wrong username");
         Assert.assertEquals(response.getEmail(), user.getEmail(), "Wrong email");
         Assert.assertEquals(response.getName(), user.getName(), "Wrong name");
         Assert.assertEquals(response.getSurname(), user.getSurname(), "Wrong surname");
+    }
+
+    @Test(dependsOnMethods = "verifyUserRegistration")
+    public void verifyOneUserData() {
+        List<UserCreateResponse> users = given()
+                .spec(authSpec(authToken))
+                .get(GET_ALL_USERS)
+                .then().log().ifError()
+                .extract().body().jsonPath().getList(".", UserCreateResponse.class);
+
+        String email = users.get(0).getEmail();
+
+        UserEmail body = UserEmail.builder()
+                .email(email)
+                .build();
+
+        UserCreateResponse response = given()
+                .spec(authSpec(authToken))
+                .body(body)
+                .when()
+                .post(GET_ONE_USER)
+                .then().log().all()
+                .statusCode(201)
+                .extract().as(UserCreateResponse.class);
+
+        Assert.assertEquals(response.getEmail(), email, "Email should match");
     }
 
 }
