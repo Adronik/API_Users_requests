@@ -7,10 +7,11 @@ import lombok.Data;
 @Builder
 public class UserCreateResponse {
 
-    public String id;
-    public String username;
-    public String email;
-    public String name;
-    public String surname;
+    private String id;
+    private String currency_code;
+    private String username;
+    private String email;
+    private String name;
+    private String surname;
 
 }

@@ -8,16 +8,16 @@ import lombok.Data;
 @Builder
 public class UserCreate {
 
-    public String currency_code;
-    public String email;
-    public String name;
+    private String currency_code;
+    private String email;
+    private String name;
 
     @JsonProperty("password_change")
-    public String passwordChange;
+    private String passwordChange;
     @JsonProperty("password_repeat")
-    public String passwordRepeat;
+    private String passwordRepeat;
 
-    public String surname;
-    public String username;
+    private String surname;
+    private String username;
 
 }

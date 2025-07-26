@@ -78,11 +78,16 @@ public class PlayersAPI extends BaseTestSetups {
                 .body(body)
                 .when()
                 .post(GET_ONE_USER)
-                .then().log().all()
+                .then().log().ifError()
                 .statusCode(201)
                 .extract().as(UserCreateResponse.class);
 
         Assert.assertEquals(response.getEmail(), email, "Email should match");
+        Assert.assertNotNull(response.getId(), "ID should not be null");
+        Assert.assertNotNull(response.getCurrency_code(), "Currency code should not be null");
+        Assert.assertNotNull(response.getName(), "Name should not be null");
+        Assert.assertNotNull(response.getSurname(), "Surname should not be null");
+        Assert.assertNotNull(response.getUsername(), "Username should not be null");
     }
 
 }
