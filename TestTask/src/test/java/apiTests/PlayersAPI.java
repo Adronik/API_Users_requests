@@ -5,6 +5,7 @@ import api.dto.UserAuth;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import static utils.APIUrls.LOGIN_PATH;
 import static io.restassured.RestAssured.given;
 
 
@@ -21,7 +22,7 @@ public class PlayersAPI extends BaseTestSetups {
         AuthResponse response = given()
                 .body(body)
                 .when()
-                .post("/api/tester/login")
+                .post(LOGIN_PATH)
                 .then().log().ifError()
                 .statusCode(201)
                 .extract()

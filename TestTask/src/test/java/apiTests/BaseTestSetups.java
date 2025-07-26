@@ -1,6 +1,6 @@
 package apiTests;
 
-import Utils.UserProvider;
+import utils.UserProvider;
 import org.testng.annotations.BeforeMethod;
 
 import static api.spec.Specifications.*;

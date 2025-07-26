@@ -7,6 +7,7 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
+import static utils.APIUrls.BASE_URL;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.core.AnyOf.anyOf;
 
@@ -14,7 +15,7 @@ public class Specifications {
 
     public static RequestSpecification requestSpecification(){
         return new RequestSpecBuilder()
-                .setBaseUri("https://testslotegrator.com")
+                .setBaseUri(BASE_URL)
                 .setContentType(ContentType.JSON)
                 .build();
     }
