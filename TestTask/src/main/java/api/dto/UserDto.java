@@ -19,12 +19,15 @@ public class UserDto {
     private String comment;
     private String createBy;
     private String report;
+
     @JsonProperty("updated_at")
     private String updatedAt;
+
     @JsonProperty("created_at")
     private String createdAt;
 
     private Boolean feedback;
+
     @JsonProperty("finished_at")
     private String finishedAt;
 
