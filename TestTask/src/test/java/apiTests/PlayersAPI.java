@@ -14,8 +14,8 @@ import static utils.APIUrls.USERS_CREATION_PATH;
 
 public class PlayersAPI extends BaseTestSetups {
 
-    @DataProvider(name = "userCreationDataProvider", parallel = true)
-    public Object[][] userCreationDataProvider() {
+    @DataProvider(name = "userDataProvider", parallel = true)
+    public Object[][] userDataProvider() {
         Object[][] users = new Object[12][1];
         for (int i = 0; i < 12; i++) {
             String uniqueSuffix = valueOf(System.currentTimeMillis() + i);
@@ -38,7 +38,7 @@ public class PlayersAPI extends BaseTestSetups {
         Assert.assertNotNull(authToken, "Access token is null");
     }
 
-    @Test(dataProvider = "userCreationDataProvider")
+    @Test(dataProvider = "userDataProvider")
     public void verifyUserRegistration(UserCreate user) {
         UserCreateResponse response = given()
                 .spec(authSpec(authToken))
