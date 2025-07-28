@@ -1,9 +1,15 @@
 package apiTests;
 
 import api.dto.UserAuth;
+import api.dto.UserCreateResponse;
 import io.restassured.http.ContentType;
+import net.datafaker.Faker;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import utils.UserProvider;
+import utils.LoginUserProvider;
+
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import static io.restassured.RestAssured.given;
 import static utils.APIUrls.BASE_URL;
@@ -11,12 +17,14 @@ import static utils.APIUrls.LOGIN_PATH;
 
 public class BaseTestSetups {
 
-    public UserProvider user;
+    protected static LoginUserProvider user;
     protected static String authToken;
+    protected final Faker faker = new Faker();
+    protected static List<UserCreateResponse> users = new CopyOnWriteArrayList<>();
 
     @BeforeClass()
     public void testPreparation(){
-        user = new UserProvider();
+        user = new LoginUserProvider();
 
         UserAuth authBody = UserAuth.builder()
                 .email(user.get("email"))
@@ -33,6 +41,11 @@ public class BaseTestSetups {
                 .statusCode(201)
                 .extract()
                 .path("accessToken");
+    }
+
+    @AfterClass
+    public void testCleanup(){
+        users.clear();
     }
 
 }

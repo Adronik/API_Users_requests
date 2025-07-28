@@ -10,5 +10,6 @@ public class APIUrls {
     public static final String USERS_CREATION_PATH = "/api/automationTask/create";
     public static final String GET_ONE_USER = "/api/automationTask/getOne";
     public static final String GET_ALL_USERS = "/api/automationTask/getAll";
+    public static final String DELETE_USER = "/api/automationTask/deleteOne/";
 
 }
